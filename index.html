@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Protected Media</title>
+</head>
+<body>
+  <div id="protected" style="display:none;">
+    <h2>Секретный контент</h2>
+    <div id="images"></div>
+    <div id="videos"></div>
+  </div>
+
+  <script>
+    // SHA-256 от "ling"
+    const storedHash = "6cd4c9c389b460a1f60357bebdec27a788c4abbf1aa3dead4d3c0cfd0cebea2a"; 
+    // ↑ сюда вставь настоящий SHA-256 хеш строки "ling"
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function showFile(path, type, container) {
+      const res = await fetch(path);
+      const buf = await res.arrayBuffer();
+      const blob = new Blob([buf], { type });
+      const url = URL.createObjectURL(blob);
+
+      if (type.startsWith("image")) {
+        const img = document.createElement("img");
+        img.src = url;
+        img.style.maxWidth = "300px";
+        container.appendChild(img);
+      } else if (type.startsWith("video")) {
+        const vid = document.createElement("video");
+        vid.src = url;
+        vid.controls = true;
+        vid.width = 320;
+        container.appendChild(vid);
+      }
+    }
+
+    (async () => {
+      const input = prompt("Введите пароль:");
+      if (input) {
+        const hash = await sha256(input);
+        console.log("Введённый пароль: ", hash);
+        if (hash === storedHash) {
+          document.getElementById("protected").style.display = "block";
+
+          const imgContainer = document.getElementById("images");
+          const vidContainer = document.getElementById("videos");
+
+          // картинки (txt → png)
+          await showFile("img1.txt", "image/jpg", imgContainer);
+          await showFile("img2.txt", "image/jpg", imgContainer);
+
+          // видео (txt → mp4)
+          await showFile("video1.txt", "video/mp4", vidContainer);
+          await showFile("video2.txt", "video/mp4", vidContainer);
+          await showFile("video3.txt", "video/mp4", vidContainer);
+          await showFile("video4.txt", "video/mp4", vidContainer);
+
+        } else {
+          alert("Неверный пароль!");
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
