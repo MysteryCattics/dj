@@ -1,5 +1,6 @@
 body {
-    background-color: #282727
+    background: linear-gradient(to bottom, rgb(38, 38, 38), rgb(22, 22, 22));
+    font-family: 'Geologica', 'Roboto', sans-serif;
 }
 h1 {
     color: white
@@ -15,4 +16,87 @@ li::marker {
 }
 .link {
     color: #64B5F6
+}
+
+marquee h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+
+.independentbtn {
+  color: white;
+  font-size: 16px;
+  background: linear-gradient(270deg, rgb(42, 177, 255), rgb(2, 107, 167));
+  background-size: 200% 200%;
+  border-radius: 20px;
+  width: 150px;
+  height: 50px;
+  display: block;
+  margin-top: 10px;
+  margin-left: 20px;
+  border: none;
+  cursor: pointer;
+
+  /* плавные переходы для цвета, тени и трансформации */
+  transition: 
+    background-position 1s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+
+/* при наведении — лёгкое увеличение и движение градиента */
+.independentbtn:hover {
+  background-position: 100% 50%;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+  transform: scale(1.05);
+}
+
+/* при клике — вдавленная кнопка */
+.independentbtn:active {
+  box-shadow: inset 4px 4px 10px rgba(0,0,0,0.3);
+  color: rgb(206, 206, 206);
+  font-size: 15px;
+  background: linear-gradient(to bottom, rgb(32, 133, 192), rgb(6, 116, 180));
+  transform: scale(0.97);
+
+}
+
+.backbtn {
+  color: white;
+  font-size: 16px;
+  background: linear-gradient(270deg, rgb(255, 180, 42), rgb(167, 120, 2));
+  background-size: 200% 200%;
+  border-radius: 20px;
+  min-width: 150px;
+  height: 50px;
+  display: block;
+  margin-top: 10px;
+  margin-left: 20px;
+  border: none;
+  cursor: pointer;
+
+  /* плавные переходы для цвета, тени и трансформации */
+  transition: 
+    background-position 1s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+
+/* при наведении — лёгкое увеличение и движение градиента */
+.backbtn:hover {
+  background-position: 100% 50%;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+  transform: scale(1.05);
+}
+
+/* при клике — вдавленная кнопка */
+.backbtn:active {
+  box-shadow: inset 4px 4px 10px rgba(0,0,0,0.3);
+  font-size: 15px;
+  background: linear-gradient(to bottom, rgb(255, 180, 42), rgb(167, 120, 2));
+  transform: scale(0.97);
+
 }
