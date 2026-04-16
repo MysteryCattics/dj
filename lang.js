@@ -1,6 +1,5 @@
 // lang.js
 
-// Установить cookie
 function setCookie(name, value, days) {
   const d = new Date();
   d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -8,7 +7,6 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
-// Получить cookie
 function getCookie(name) {
   const cname = name + "=";
   const decodedCookie = decodeURIComponent(document.cookie);
@@ -22,12 +20,12 @@ function getCookie(name) {
   return "";
 }
 
-// Загрузить JSON перевода и применить
 async function setLang(lang) {
   try {
     const response = await fetch(`lang/${lang}.json`);
     const translations = await response.json();
 
+    // обновляем текст на странице
     document.querySelectorAll("[data-key]").forEach(el => {
       const key = el.getAttribute("data-key");
       if (translations[key]) {
@@ -35,20 +33,22 @@ async function setLang(lang) {
       }
     });
 
-    // Сохраняем выбранный язык в cookie
+    // обновляем заголовок вкладки
+    if (translations.pageTitle) {
+      document.title = translations.pageTitle;
+    }
+
+    // сохраняем язык
     setCookie("siteLang", lang, 30);
   } catch (err) {
     console.error("Ошибка загрузки языка:", err);
   }
 }
 
-// Инициализация при загрузке страницы
 document.addEventListener("DOMContentLoaded", () => {
-  // Проверяем сохранённый язык
-  const savedLang = getCookie("siteLang") || "ru"; // по умолчанию русский
+  const savedLang = getCookie("siteLang") || "ru";
   setLang(savedLang);
 
-  // Навешиваем обработчики на флаги
   const uaFlag = document.querySelector(".ualang");
   const ruFlag = document.querySelector(".rulang");
 
