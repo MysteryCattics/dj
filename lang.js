@@ -43,8 +43,12 @@ async function setLang(lang) {
     });
 
     // оновлення заголовка вкладки
-    if (translations.pageTitle) {
+    const currentPage = window.location.pathname.split("/").pop();
+    if (translations.pageTitle && currentPage === "aboutus.html") {
       document.title = translations.pageTitle;
+    }
+    else {
+      document.title = translations.mainPagetitle;
     }
 
     // збереження вибору
