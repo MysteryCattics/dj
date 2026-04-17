@@ -6,6 +6,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="pagestyle.css">
   <link rel="icon" type="image/x-icon" href="imgs/favicon.png">
+  <script src="js/jquery-2.1.0.min.js"></script>
 </head>
 
 
@@ -13,17 +14,10 @@
     <script src="lang.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <header>
-    <div class="header">
-        <a href="index.html">
-            <img src="imgs/LogoWhiteClear.png" alt="LHA Logo" class="logo">
-        </a>
-        <div class="flags">
-        <img src="imgs/flag_ua.png" alt="UA Flag" class="ualang">
-        <img src="imgs/flag_ru.png" alt="RU Flag" class="rulang">
-        </div>
-    </div>
-    </header>
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script>
+    $("#header").load("header.html");
+    </script>
     <h1 data-key="mainHeading">Ласкаво просимо до LHA - АРХІВУ ШКІЛЬНИХ РЕСУРСІВ!</h1>
     <p data-key="mainDesk">Тут ви можете знайти різні ресурси 7-Д класу, переважно це видалені/забуті фотографії або відео.</p>
     <button data-key="" class="independentbtn" onclick="window.location.href='jopadenisa.html'">[-] Жопа Дениса</button>
